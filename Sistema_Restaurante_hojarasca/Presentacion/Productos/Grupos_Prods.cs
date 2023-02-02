@@ -14,6 +14,10 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Productos
         }
         string ESTADO_IMAGEN;
 
+        private void test()
+        {
+
+        }
         private void Grupos_Prods_Load(object sender, EventArgs e)
         {
             ESTADO_IMAGEN = "VACIO";
