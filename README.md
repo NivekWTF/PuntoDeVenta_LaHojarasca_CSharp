@@ -1,4 +1,4 @@
-# Punto DeVenta La Hojarasca_CSharp
+# Punto de Venta La Hojarasca_CSharp
 Punto de Venta en Desarrollo para el Restaraunte La Hojarasca
 #### (Proyecto en Desarrollo)
 
