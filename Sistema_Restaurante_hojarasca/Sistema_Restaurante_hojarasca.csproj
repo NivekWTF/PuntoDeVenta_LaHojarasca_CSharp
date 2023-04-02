@@ -50,6 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datos\CONEXION-MAESTRA.cs" />
+    <Compile Include="Datos\DEditar.cs" />
+    <Compile Include="Datos\DEliminar.cs" />
+    <Compile Include="Datos\DInsertar.cs" />
+    <Compile Include="Datos\DMostrar.cs" />
+    <Compile Include="Logica\LUsuarios.cs" />
     <Compile Include="Presentacion\Conexion Manual\CONEXION_MANUAL.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 
-namespace Sistema_Restaurante_hojarasca.CONEXION
+namespace Sistema_Restaurante_hojarasca.Datos
 {
     class CONEXIONMAESTRA
     {
