@@ -3,6 +3,8 @@ using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Drawing;
+using Sistema_Restaurante_hojarasca.Datos;
+
 
 namespace Sistema_Restaurante_hojarasca.MODULOS.Productos
 {
@@ -33,8 +35,8 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Productos
         {
             try
             {
-                CONEXION.CONEXIONMAESTRA.abrir();
-                SqlCommand cmd = new SqlCommand("Insertar_Grupo_Productos", CONEXION.CONEXIONMAESTRA.conectar);
+                CONEXIONMAESTRA.abrir();
+                SqlCommand cmd = new SqlCommand("Insertar_Grupo_Productos", CONEXIONMAESTRA.conectar);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Grupo", txtGrupo.Text);
                 cmd.Parameters.AddWithValue("@PorDefecto", "NO");
@@ -45,7 +47,7 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Productos
                 cmd.Parameters.AddWithValue("@Icono", ms.GetBuffer());
 
                 cmd.ExecuteNonQuery();
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
             }
             catch (Exception ex)
             {

@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using Sistema_Restaurante_hojarasca.Datos;
 
 namespace Sistema_Restaurante_hojarasca.MODULOS.PUNTO_DE_VENTA
 {
@@ -36,13 +34,13 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.PUNTO_DE_VENTA
         {
             try
             {
-                CONEXION.CONEXIONMAESTRA.abrir();
-                SqlCommand cmd = new SqlCommand("contar_Productos_Por_grupo", CONEXION.CONEXIONMAESTRA.conectar);
+                CONEXIONMAESTRA.abrir();
+                SqlCommand cmd = new SqlCommand("contar_Productos_Por_grupo", CONEXIONMAESTRA.conectar);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@idgrupo", Punto_de_Venta.idGrupo);
                 cantidad_productos = Convert.ToInt32(cmd.ExecuteScalar());
 
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
             }
             catch (Exception ex)
             {
@@ -56,8 +54,8 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.PUNTO_DE_VENTA
             try
             {
                 PanelProductos.Controls.Clear();
-                CONEXION.CONEXIONMAESTRA.abrir();
-                SqlCommand CMD = new SqlCommand("paginar_Productos_por_Grupo", CONEXION.CONEXIONMAESTRA.conectar);
+                CONEXIONMAESTRA.abrir();
+                SqlCommand CMD = new SqlCommand("paginar_Productos_por_Grupo", CONEXIONMAESTRA.conectar);
                 CMD.CommandType = CommandType.StoredProcedure;
                 CMD.Parameters.AddWithValue("@id_grupo", Punto_de_Venta.idGrupo);
                 CMD.Parameters.AddWithValue("@Desde", PaginaInicio);
@@ -107,12 +105,12 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.PUNTO_DE_VENTA
                     lbl.BringToFront();
                     PanelProductos.Controls.Add(p1);
                 }
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.StackTrace);
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
             }
         }
 

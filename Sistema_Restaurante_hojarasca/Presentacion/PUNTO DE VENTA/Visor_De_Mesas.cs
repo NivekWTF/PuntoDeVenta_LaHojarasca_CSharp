@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using Sistema_Restaurante_hojarasca.Datos;
 
 namespace Sistema_Restaurante_hojarasca.MODULOS.PUNTO_DE_VENTA
 {
@@ -36,9 +37,9 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.PUNTO_DE_VENTA
             flowLayoutPanel1.Controls.Clear();
             try
             {
-                CONEXION.CONEXIONMAESTRA.abrir();
+                 CONEXIONMAESTRA.abrir();
                 string query = "Select * from SALON Where Estado='ACTIVO'";
-                SqlCommand cmd = new SqlCommand(query, CONEXION.CONEXIONMAESTRA.conectar);
+                SqlCommand cmd = new SqlCommand(query,  CONEXIONMAESTRA.conectar);
                 SqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -74,11 +75,11 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.PUNTO_DE_VENTA
 
                     b.Click += new EventHandler(miEvento_salon_button);
                 }
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                 CONEXIONMAESTRA.Cerrar();
             }
             catch (Exception ex)
             {
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                 CONEXIONMAESTRA.Cerrar();
                 MessageBox.Show(ex.StackTrace);
             }
         }
@@ -104,9 +105,9 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.PUNTO_DE_VENTA
             Panel_Mesas.Controls.Clear();
             try
             {
-                CONEXION.CONEXIONMAESTRA.abrir();
+                 CONEXIONMAESTRA.abrir();
                 string query = "mostrar_Mesas_PorSalon";
-                SqlCommand cmd = new SqlCommand(query, CONEXION.CONEXIONMAESTRA.conectar);
+                SqlCommand cmd = new SqlCommand(query,  CONEXIONMAESTRA.conectar);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id_salon", id_salon);
                 SqlDataReader rdr = cmd.ExecuteReader();
@@ -154,11 +155,11 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.PUNTO_DE_VENTA
 
                     b.Click += new EventHandler(miEvento_buton_mesa);
                 }
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                 CONEXIONMAESTRA.Cerrar();
             }
             catch (Exception ex)
             {
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                 CONEXIONMAESTRA.Cerrar();
                 MessageBox.Show(ex.StackTrace);
             }
         }

@@ -2,6 +2,7 @@
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using Sistema_Restaurante_hojarasca.Datos;
 
 namespace Sistema_Restaurante_hojarasca.MODULOS.Mesas
 {
@@ -31,17 +32,17 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Mesas
             {
                 try
                 {
-                    CONEXION.CONEXIONMAESTRA.abrir();
-                    SqlCommand cmd = new SqlCommand("Insertar_mesa",CONEXION.CONEXIONMAESTRA.conectar);
+                    CONEXIONMAESTRA.abrir();
+                    SqlCommand cmd = new SqlCommand("Insertar_mesa",CONEXIONMAESTRA.conectar);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@mesa", "NULO");
                     cmd.Parameters.AddWithValue("@idsalon", idsalon);
                     cmd.ExecuteNonQuery();
-                    CONEXION.CONEXIONMAESTRA.Cerrar();
+                    CONEXIONMAESTRA.Cerrar();
                 }
                 catch (Exception ex)
                 {
-                    CONEXION.CONEXIONMAESTRA.Cerrar();
+                    CONEXIONMAESTRA.Cerrar();
                     MessageBox.Show(ex.StackTrace);
                 }
             }
@@ -49,20 +50,20 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Mesas
 
         private void mostrarIdSalonRI()
         {
-            SqlCommand com = new SqlCommand("MostrarIDSalonRI", CONEXION.CONEXIONMAESTRA.conectar);
+            SqlCommand com = new SqlCommand("MostrarIDSalonRI", CONEXIONMAESTRA.conectar);
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.AddWithValue("@Salon", txtSalonEdicion.Text);
 
             try
             {
-                CONEXION.CONEXIONMAESTRA.abrir();
+                CONEXIONMAESTRA.abrir();
                 idsalon = Convert.ToInt32(com.ExecuteScalar());
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.StackTrace);
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
             }
         }
 
@@ -70,19 +71,19 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Mesas
         {
             try
             {
-                CONEXION.CONEXIONMAESTRA.abrir();
-                SqlCommand cmd = new SqlCommand("insertar_salon", CONEXION.CONEXIONMAESTRA.conectar);
+                CONEXIONMAESTRA.abrir();
+                SqlCommand cmd = new SqlCommand("insertar_salon", CONEXIONMAESTRA.conectar);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Salon", txtSalonEdicion.Text);
                 cmd.ExecuteNonQuery();
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
                 mostrarIdSalonRI();
                 InsertarMesasVacias();
                 Close();
             }
             catch (Exception ex)
             {
-                CONEXION.CONEXIONMAESTRA.conectar.Close();
+                CONEXIONMAESTRA.conectar.Close();
                 MessageBox.Show(ex.Message);
             }
         }

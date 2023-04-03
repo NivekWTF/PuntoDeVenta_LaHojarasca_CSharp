@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
+using Sistema_Restaurante_hojarasca.Datos;
 
 namespace Sistema_Restaurante_hojarasca.MODULOS.Productos
 {
@@ -25,8 +26,8 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Productos
             try
             {
                 Panel_Grupos.Controls.Clear();
-                CONEXION.CONEXIONMAESTRA.abrir();
-                SqlCommand cmd = new SqlCommand("select * from Grupo_Productos", CONEXION.CONEXIONMAESTRA.conectar);
+                CONEXIONMAESTRA.abrir();
+                SqlCommand cmd = new SqlCommand("select * from Grupo_Productos", CONEXIONMAESTRA.conectar);
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -129,11 +130,11 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Productos
                     lbl.Click += new EventHandler(eventoLabel);
                     img1.Click += new EventHandler(eventoImagen);
                 }
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
             }
             catch (Exception ex)
             {
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
                 MessageBox.Show(ex.StackTrace);
             }
         }
@@ -196,8 +197,8 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Productos
             try
             {
                 PanelProductos_Cont.Controls.Clear();
-                CONEXION.CONEXIONMAESTRA.abrir();
-                SqlCommand cmd = new SqlCommand("mostraer_productos_por_grupo", CONEXION.CONEXIONMAESTRA.conectar);
+                CONEXIONMAESTRA.abrir();
+                SqlCommand cmd = new SqlCommand("mostraer_productos_por_grupo", CONEXIONMAESTRA.conectar);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id_grupo", idGrupo);
                 SqlDataReader rdr = cmd.ExecuteReader();
@@ -293,7 +294,7 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Productos
                     //se añade todo al panel principal de PRODUCTOS
                     PanelProductos_Cont.Controls.Add(p1);
                 }
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
             }
             catch (Exception ex)
             {

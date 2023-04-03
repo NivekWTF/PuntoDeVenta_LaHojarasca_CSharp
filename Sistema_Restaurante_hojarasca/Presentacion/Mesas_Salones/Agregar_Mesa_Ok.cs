@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using Sistema_Restaurante_hojarasca.Datos;
 
 namespace Sistema_Restaurante_hojarasca.MODULOS
 {
@@ -29,19 +30,19 @@ namespace Sistema_Restaurante_hojarasca.MODULOS
         {
             try
             {
-                CONEXION.CONEXIONMAESTRA.abrir();
-                SqlCommand cmd = new SqlCommand("EDITAR_MESA", CONEXION.CONEXIONMAESTRA.conectar);
+                CONEXIONMAESTRA.abrir();
+                SqlCommand cmd = new SqlCommand("EDITAR_MESA", CONEXIONMAESTRA.conectar);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@mesa", txtMesaEdicion.Text);
                 cmd.Parameters.AddWithValue("@id_mesa", MODULOS.Mesas.Salones.idMesa);
                 cmd.ExecuteNonQuery();
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
                 Close();
                 
             }
             catch (Exception ex)
             {
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
                 MessageBox.Show(ex.Message);
             }
 

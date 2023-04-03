@@ -51,9 +51,11 @@
   <ItemGroup>
     <Compile Include="Datos\CONEXION-MAESTRA.cs" />
     <Compile Include="Datos\DEditar.cs" />
-    <Compile Include="Datos\DEliminar.cs" />
-    <Compile Include="Datos\DInsertar.cs" />
-    <Compile Include="Datos\DMostrar.cs" />
+    <Compile Include="Datos\DModulos.cs" />
+    <Compile Include="Datos\DPermisos.cs" />
+    <Compile Include="Datos\DUsuarios.cs" />
+    <Compile Include="Logica\LModulos.cs" />
+    <Compile Include="Logica\LPermisos.cs" />
     <Compile Include="Logica\LUsuarios.cs" />
     <Compile Include="Presentacion\Conexion Manual\CONEXION_MANUAL.cs">
       <SubType>Form</SubType>
@@ -141,6 +143,12 @@
     <Compile Include="Presentacion\PUNTO DE VENTA\Visor_De_Mesas.Designer.cs">
       <DependentUpon>Visor_De_Mesas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentacion\Usuarios\frmUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Usuarios\frmUsuarios.Designer.cs">
+      <DependentUpon>frmUsuarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Presentacion\Conexion Manual\CONEXION_MANUAL.resx">
@@ -181,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\PUNTO DE VENTA\Visor_De_Mesas.resx">
       <DependentUpon>Visor_De_Mesas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Usuarios\frmUsuarios.resx">
+      <DependentUpon>frmUsuarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -286,6 +297,38 @@
   <ItemGroup>
     <None Include="Resources\amarillo - copia.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\search dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\8.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image-gallery.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

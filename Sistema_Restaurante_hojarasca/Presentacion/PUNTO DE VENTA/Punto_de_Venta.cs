@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.IO;
+using Sistema_Restaurante_hojarasca.Datos;
 
 namespace Sistema_Restaurante_hojarasca.MODULOS.PUNTO_DE_VENTA
 {
@@ -47,15 +48,15 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.PUNTO_DE_VENTA
         {
             try
             {
-                CONEXION.CONEXIONMAESTRA.abrir();
-                SqlCommand cmd = new SqlCommand("select count (IdGrupo) from Grupo_Productos", CONEXION.CONEXIONMAESTRA.conectar);
+                 CONEXIONMAESTRA.abrir();
+                SqlCommand cmd = new SqlCommand("select count (IdGrupo) from Grupo_Productos",  CONEXIONMAESTRA.conectar);
                 cantidad_Grupos = Convert.ToInt32(cmd.ExecuteScalar());
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                 CONEXIONMAESTRA.Cerrar();
 
             }
             catch (Exception ex)
             {
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                 CONEXIONMAESTRA.Cerrar();
                 MessageBox.Show(ex.Message);
             }
         }
@@ -65,8 +66,8 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.PUNTO_DE_VENTA
             flowLayoutPanelGrupos.Controls.Clear();
             try
             {
-                CONEXION.CONEXIONMAESTRA.abrir();
-                SqlCommand CMD = new SqlCommand("Paginar_Grupos", CONEXION.CONEXIONMAESTRA.conectar);
+                 CONEXIONMAESTRA.abrir();
+                SqlCommand CMD = new SqlCommand("Paginar_Grupos",  CONEXIONMAESTRA.conectar);
                 CMD.CommandType = CommandType.StoredProcedure;
                 CMD.Parameters.AddWithValue("@Desde", PaginaIncio);
                 CMD.Parameters.AddWithValue("@Hasta", PaginaMaxima);
@@ -115,7 +116,7 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.PUNTO_DE_VENTA
                     lbl1.Click += new EventHandler (miEventoLabel);
                     Img1.Click += new EventHandler(miEventoImagen);
                 }
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                 CONEXIONMAESTRA.Cerrar();
             }
             catch (Exception ex)
             {

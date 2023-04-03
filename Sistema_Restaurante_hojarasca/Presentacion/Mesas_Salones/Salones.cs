@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
+using Sistema_Restaurante_hojarasca.Datos;
 
 namespace Sistema_Restaurante_hojarasca.MODULOS.Mesas
 {
@@ -36,8 +32,8 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Mesas
             try
             {
                 Panel_Mesas.Controls.Clear();
-                CONEXION.CONEXIONMAESTRA.abrir();
-                SqlCommand cmd = new SqlCommand("mostrar_Mesas_PorSalon", CONEXION.CONEXIONMAESTRA.conectar);
+                CONEXIONMAESTRA.abrir();
+                SqlCommand cmd = new SqlCommand("mostrar_Mesas_PorSalon", CONEXIONMAESTRA.conectar);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id_salon", id_salon);
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -76,13 +72,13 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Mesas
                     b.Click += new EventHandler(miEvento);
                     panel.Click += new EventHandler(miEventoPanel_click);
                 }
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
                 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.StackTrace);
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
             }
            
 
@@ -116,8 +112,8 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Mesas
             try
             {
                 flowLayoutPanel1.Controls.Clear();
-                CONEXION.CONEXIONMAESTRA.abrir();
-                SqlCommand CMD = new SqlCommand("mostrar_SALON", CONEXION.CONEXIONMAESTRA.conectar);
+                CONEXIONMAESTRA.abrir();
+                SqlCommand CMD = new SqlCommand("mostrar_SALON", CONEXIONMAESTRA.conectar);
                 CMD.CommandType = CommandType.StoredProcedure;
                 CMD.Parameters.AddWithValue("@buscar", txtBuscarSalon.Text);
                 SqlDataReader dataread = CMD.ExecuteReader();
@@ -158,11 +154,11 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Mesas
                     flowLayoutPanel1.Controls.Add(panelC1);
                     btn.Click += new EventHandler(mievento_salon_btn);
                 }
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
             }
             catch (Exception ex)
             {
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
                 MessageBox.Show(ex.StackTrace);
             }
         }
@@ -231,10 +227,10 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Mesas
             try
             {
                 SqlCommand cmd = new SqlCommand();
-                CONEXION.CONEXIONMAESTRA.abrir();
-                cmd = new SqlCommand("aumentar_Tamanio_mesa", CONEXION.CONEXIONMAESTRA.conectar);
+                CONEXIONMAESTRA.abrir();
+                cmd = new SqlCommand("aumentar_Tamanio_mesa", CONEXIONMAESTRA.conectar);
                 cmd.ExecuteNonQuery();
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
                 DibujarMesas();
             }
             catch (Exception ex)
@@ -249,10 +245,10 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Mesas
             try
             {
                 SqlCommand cmd = new SqlCommand();
-                CONEXION.CONEXIONMAESTRA.abrir();
-                cmd = new SqlCommand("disminuir_Tamanio_mesa", CONEXION.CONEXIONMAESTRA.conectar);
+                CONEXIONMAESTRA.abrir();
+                cmd = new SqlCommand("disminuir_Tamanio_mesa", CONEXIONMAESTRA.conectar);
                 cmd.ExecuteNonQuery();
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
                 DibujarMesas();
             }
             catch (Exception ex)
@@ -267,10 +263,10 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Mesas
             try
             {
                 SqlCommand cmd = new SqlCommand();
-                CONEXION.CONEXIONMAESTRA.abrir();
-                cmd = new SqlCommand("disminuir_tamanio_Letra", CONEXION.CONEXIONMAESTRA.conectar);
+                CONEXIONMAESTRA.abrir();
+                cmd = new SqlCommand("disminuir_tamanio_Letra", CONEXIONMAESTRA.conectar);
                 cmd.ExecuteNonQuery();
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
                 DibujarMesas();
             }
             catch (Exception ex)
@@ -285,10 +281,10 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Mesas
             try
             {
                 SqlCommand cmd = new SqlCommand();
-                CONEXION.CONEXIONMAESTRA.abrir();
-                cmd = new SqlCommand("aumentar_tamanio_Letra", CONEXION.CONEXIONMAESTRA.conectar);
+                CONEXIONMAESTRA.abrir();
+                cmd = new SqlCommand("aumentar_tamanio_Letra", CONEXIONMAESTRA.conectar);
                 cmd.ExecuteNonQuery();
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
                 DibujarMesas();
             }
             catch (Exception ex)

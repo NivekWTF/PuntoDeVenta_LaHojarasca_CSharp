@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using Sistema_Restaurante_hojarasca.Datos;
 
 namespace Sistema_Restaurante_hojarasca.MODULOS.PUNTO_DE_VENTA
 {
@@ -37,8 +38,8 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.PUNTO_DE_VENTA
             try
             {
                 PanelProductos.Controls.Clear();
-                CONEXION.CONEXIONMAESTRA.abrir();
-                SqlCommand CMD = new SqlCommand("paginar_Productos_por_Grupo", CONEXION.CONEXIONMAESTRA.conectar);
+                CONEXIONMAESTRA.abrir();
+                SqlCommand CMD = new SqlCommand("paginar_Productos_por_Grupo", CONEXIONMAESTRA.conectar);
                 CMD.CommandType = CommandType.StoredProcedure;
                 CMD.Parameters.AddWithValue("@Desde", PaginaIncio);
                 CMD.Parameters.AddWithValue("@Hasta", PaginaMaxima);
@@ -87,12 +88,12 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.PUNTO_DE_VENTA
                     lbl.BringToFront();
                     PanelProductos.Controls.Add(p1);
                 }
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                CONEXION.CONEXIONMAESTRA.Cerrar();
+                CONEXIONMAESTRA.Cerrar();
             }
         }
     }
