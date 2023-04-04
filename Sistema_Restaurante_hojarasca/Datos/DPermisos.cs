@@ -13,7 +13,7 @@ namespace Sistema_Restaurante_hojarasca.Datos
 {
     public class DPermisos
     {
-        private bool Insertar_Permisos(LPermisos parametros)
+        public bool Insertar_Permisos(LPermisos parametros)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace Sistema_Restaurante_hojarasca.Datos
 
         }
 
-        private bool EditarPermisos(LPermisos parametros)
+        public bool EditarPermisos(LPermisos parametros)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace Sistema_Restaurante_hojarasca.Datos
             }
         }
 
-        public bool ElimarUsuarios(LUsuarios parametros)
+        public bool EliminarUsuarios(LUsuarios parametros)
         {
             try
             {
@@ -85,12 +85,12 @@ namespace Sistema_Restaurante_hojarasca.Datos
             }
         }
 
-        public void MostrarUsuarios(ref DataTable dt)
+        public void MostrarPermisos(ref DataTable dt)
         {
             try
             {
                 CONEXIONMAESTRA.abrir();
-                SqlDataAdapter da = new SqlDataAdapter("mostrar_Permisos", CONEXIONMAESTRA.conectar);
+                SqlDataAdapter da = new SqlDataAdapter("mostrar_Permisos_", CONEXIONMAESTRA.conectar);
                 da.Fill(dt);
 
             }

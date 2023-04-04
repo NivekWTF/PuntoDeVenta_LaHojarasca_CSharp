@@ -54,7 +54,7 @@ namespace Sistema_Restaurante_hojarasca.Datos
                 cmd.Parameters.AddWithValue("@Icono", parametros.Icono);
                 cmd.Parameters.AddWithValue("@Correo", parametros.Correo);
                 cmd.Parameters.AddWithValue("@Rol", parametros.Rol);
-                cmd.Parameters.AddWithValue("@Estado", "ACTIVO");
+                cmd.Parameters.AddWithValue("@Estado_Icono", "ACTIVO");
                 cmd.ExecuteNonQuery();
                 return true;
 
@@ -98,6 +98,28 @@ namespace Sistema_Restaurante_hojarasca.Datos
                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
                 da.SelectCommand.Parameters.AddWithValue("@Buscador", buscador);
                 da.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.StackTrace);
+            }
+            finally
+            {
+                CONEXIONMAESTRA.Cerrar();
+            }
+        }
+
+        public void ObtenerIDUsuarios(ref int idUser, string login)
+        {
+            try
+            {
+                CONEXIONMAESTRA.abrir();
+                SqlCommand cmd = new SqlCommand("ObtenerIDUsuario", CONEXIONMAESTRA.conectar);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Login", login);
+                idUser = Convert.ToInt32(cmd.ExecuteScalar());
+                
             }
             catch (Exception ex)
             {

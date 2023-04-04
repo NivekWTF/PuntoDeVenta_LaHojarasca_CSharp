@@ -16,9 +16,11 @@ namespace Sistema_Restaurante_hojarasca
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            MODULOS.PUNTO_DE_VENTA.Visor_De_Mesas frm_visor_de_mesas = new MODULOS.PUNTO_DE_VENTA.Visor_De_Mesas();
-            frm_visor_de_mesas.FormClosed += frm_closed;
-            frm_visor_de_mesas.ShowDialog();
+
+            Presentacion.Usuarios.frmUsuarios frm = new Presentacion.Usuarios.frmUsuarios();
+            //MODULOS.PUNTO_DE_VENTA.Visor_De_Mesas frm_visor_de_mesas = new MODULOS.PUNTO_DE_VENTA.Visor_De_Mesas();
+            frm.FormClosed += frm_closed;
+            frm.ShowDialog();
             Application.Run();
         }
 
