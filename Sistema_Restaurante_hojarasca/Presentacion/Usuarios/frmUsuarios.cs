@@ -102,10 +102,34 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
 
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
         {
-            InsertarUsuarios();
-            LimpiarCampos();
-            lblMensajeIcono.Visible = true;
+            if(ValidaCampos(txtNombre.Text) && ValidaCampos(txtUsuario.Text)
+                && ValidaCampos(txtCorreo.Text) && ValidaCampos(txtContrasena.Text))
+            {
+                InsertarUsuarios();
+                LimpiarCampos();
+                lblMensajeIcono.Visible = true;
+                cmbRoles.SelectedIndex = 0;
+            }
+            else
+            {
+                MessageBox.Show("No puedes dejar en blanco los campos.", "Mensaje",
+                                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            
+
+            
         }
+
+        private bool ValidaCampos(string cadena)
+        {
+            if (string.IsNullOrWhiteSpace(cadena) || string.IsNullOrEmpty(cadena))
+                return false;
+
+            return true;
+        }
+
+       
 
         private void InsertarUsuarios()
         {
@@ -236,6 +260,66 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
         {
             PicIcono.Image = p8.Image;
             OcultaIconos();
+        }
+
+        private void txtNombre_Validated(object sender, EventArgs e)
+        {
+            string dato = txtNombre.Text;
+
+            if (ValidaCampos(dato))
+            {
+                errorProvider1.SetError(txtNombre, "");
+            }
+            else
+            {
+                errorProvider1.SetError(txtNombre, "No puedes dejar este campo vacío");
+                txtNombre.Focus();
+            }
+        }
+
+        private void txtUsuario_Validated(object sender, EventArgs e)
+        {
+            string dato = txtUsuario.Text;
+
+            if (ValidaCampos(dato))
+            {
+                errorProvider1.SetError(txtUsuario, "");
+            }
+            else
+            {
+                errorProvider1.SetError(txtUsuario, "No puedes dejar este campo vacío");
+                txtUsuario.Focus();
+            }
+        }
+
+        private void txtCorreo_Validated(object sender, EventArgs e)
+        {
+            string dato = txtCorreo.Text;
+
+            if (ValidaCampos(dato))
+            {
+                errorProvider1.SetError(txtCorreo, "");
+            }
+            else
+            {
+                errorProvider1.SetError(txtCorreo, "No puedes dejar este campo vacío");
+                txtCorreo.Focus();
+            }
+        }
+
+        private void txtContrasena_Validated(object sender, EventArgs e)
+        {
+            string dato = txtContrasena.Text;
+
+            if (ValidaCampos(dato))
+            {
+                errorProvider1.SetError(txtContrasena, "");
+            }
+            else
+            {
+                errorProvider1.SetError(txtContrasena, "No puedes dejar este campo vacío");
+                txtContrasena.Focus();
+            }
         }
     }
 }
