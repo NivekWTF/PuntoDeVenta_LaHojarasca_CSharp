@@ -33,7 +33,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.txtBuscarSalon = new System.Windows.Forms.TextBox();
+            this.txtBuscarUsuario = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel_Registro = new System.Windows.Forms.Panel();
             this.panelIconos = new System.Windows.Forms.Panel();
@@ -58,7 +58,6 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             this.dtgUsuarios = new System.Windows.Forms.DataGridView();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.Marcar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.btnVolverRegistro = new System.Windows.Forms.Button();
@@ -78,6 +77,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Eliminar = new System.Windows.Forms.DataGridViewImageColumn();
             this.Editar = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Marcar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel_Registro.SuspendLayout();
@@ -108,7 +108,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             this.panel4.Controls.Add(this.btnAgregar);
             this.panel4.Controls.Add(this.panel3);
             this.panel4.Controls.Add(this.pictureBox1);
-            this.panel4.Controls.Add(this.txtBuscarSalon);
+            this.panel4.Controls.Add(this.txtBuscarUsuario);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 41);
             this.panel4.Name = "panel4";
@@ -123,15 +123,16 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             this.panel3.Size = new System.Drawing.Size(291, 3);
             this.panel3.TabIndex = 2;
             // 
-            // txtBuscarSalon
+            // txtBuscarUsuario
             // 
-            this.txtBuscarSalon.BackColor = System.Drawing.Color.White;
-            this.txtBuscarSalon.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtBuscarSalon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscarSalon.Location = new System.Drawing.Point(22, 34);
-            this.txtBuscarSalon.Name = "txtBuscarSalon";
-            this.txtBuscarSalon.Size = new System.Drawing.Size(291, 19);
-            this.txtBuscarSalon.TabIndex = 5;
+            this.txtBuscarUsuario.BackColor = System.Drawing.Color.White;
+            this.txtBuscarUsuario.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtBuscarUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBuscarUsuario.Location = new System.Drawing.Point(22, 34);
+            this.txtBuscarUsuario.Name = "txtBuscarUsuario";
+            this.txtBuscarUsuario.Size = new System.Drawing.Size(291, 19);
+            this.txtBuscarUsuario.TabIndex = 5;
+            this.txtBuscarUsuario.TextChanged += new System.EventHandler(this.txtBuscarUsuario_TextChanged);
             // 
             // label1
             // 
@@ -254,7 +255,6 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             this.dtgListadoPermisos.EnableHeadersVisualStyles = false;
             this.dtgListadoPermisos.Location = new System.Drawing.Point(0, 0);
             this.dtgListadoPermisos.Name = "dtgListadoPermisos";
-            this.dtgListadoPermisos.ReadOnly = true;
             this.dtgListadoPermisos.RowHeadersVisible = false;
             this.dtgListadoPermisos.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(198)))), ((int)(((byte)(91)))));
             this.dtgListadoPermisos.RowTemplate.Height = 30;
@@ -403,7 +403,9 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             this.dtgUsuarios.Name = "dtgUsuarios";
             this.dtgUsuarios.RowHeadersVisible = false;
             this.dtgUsuarios.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(198)))), ((int)(((byte)(91)))));
-            this.dtgUsuarios.RowTemplate.Height = 30;
+            this.dtgUsuarios.RowTemplate.Height = 40;
+            this.dtgUsuarios.RowTemplate.ReadOnly = true;
+            this.dtgUsuarios.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dtgUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dtgUsuarios.Size = new System.Drawing.Size(1491, 800);
             this.dtgUsuarios.TabIndex = 1;
@@ -416,12 +418,6 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // Marcar
-            // 
-            this.Marcar.HeaderText = "Marcar";
-            this.Marcar.Name = "Marcar";
-            this.Marcar.ReadOnly = true;
             // 
             // dataGridViewImageColumn1
             // 
@@ -702,6 +698,11 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             this.Editar.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.Editar.Name = "Editar";
             // 
+            // Marcar
+            // 
+            this.Marcar.HeaderText = "Marcar";
+            this.Marcar.Name = "Marcar";
+            // 
             // frmUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -740,7 +741,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
         private System.Windows.Forms.DataGridView dtgUsuarios;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox txtBuscarSalon;
+        private System.Windows.Forms.TextBox txtBuscarUsuario;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Label label6;
@@ -778,9 +779,9 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
         private UIDC.UI_CustomPictureBox PicIcono;
         private System.Windows.Forms.Button btnVolverRegistro;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Marcar;
         private System.Windows.Forms.DataGridViewImageColumn Eliminar;
         private System.Windows.Forms.DataGridViewImageColumn Editar;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn2;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Marcar;
     }
 }

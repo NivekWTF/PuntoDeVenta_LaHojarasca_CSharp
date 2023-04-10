@@ -67,7 +67,7 @@ namespace Sistema_Restaurante_hojarasca.Datos
             try
             {
                 CONEXIONMAESTRA.abrir();
-                SqlCommand cmd = new SqlCommand("eliminar_Permisos", CONEXIONMAESTRA.conectar);
+                SqlCommand cmd = new SqlCommand("eliminar_Permisos_", CONEXIONMAESTRA.conectar);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@IdUsuario", parametros.Id_Usuario);
                 cmd.ExecuteNonQuery();

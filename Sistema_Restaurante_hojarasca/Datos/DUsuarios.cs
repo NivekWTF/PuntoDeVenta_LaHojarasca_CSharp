@@ -132,12 +132,35 @@ namespace Sistema_Restaurante_hojarasca.Datos
             }
         }
 
-        public bool ElimarUsuarios(LUsuarios parametros)
+        public bool EliminarUsuarios(LUsuarios parametros)
         {
             try
             {
                 CONEXIONMAESTRA.abrir();
                 SqlCommand cmd = new SqlCommand("Eliminar_Usuario", CONEXIONMAESTRA.conectar);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@IdUsuario", parametros.IdUsuario);
+                cmd.ExecuteNonQuery();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally
+            {
+                CONEXIONMAESTRA.Cerrar();
+            }
+        }
+
+        public bool RestaurarUsuarios(LUsuarios parametros)
+        {
+            try
+            {
+                CONEXIONMAESTRA.abrir();
+                SqlCommand cmd = new SqlCommand("Restaurar_Usuario", CONEXIONMAESTRA.conectar);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@IdUsuario", parametros.IdUsuario);
                 cmd.ExecuteNonQuery();

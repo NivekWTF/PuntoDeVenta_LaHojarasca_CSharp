@@ -35,6 +35,14 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             dtgUsuarios.DataSource = dt;
         }
 
+        private void BuscarUsuarios()
+        {
+            DataTable dt = new DataTable();
+            DUsuarios funcion = new DUsuarios();
+            funcion.buscarUsuarios(ref dt, txtBuscarUsuario.Text);
+            dtgUsuarios.DataSource = dt;
+        }
+
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             LimpiarCampos();
@@ -43,7 +51,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             CargaModulos();
             panel_Registro.BringToFront();
             panel_Registro.Dock = DockStyle.Fill;
-            
+
         }
 
         private void LimpiarCampos()
@@ -52,7 +60,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             txtContrasena.Clear();
             txtCorreo.Clear();
             txtUsuario.Clear();
-            
+
         }
 
         private void CargaModulos()
@@ -105,17 +113,17 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
 
 
             }
-            
-            
+
+
         }
 
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
         {
-            if(ValidaCampos(txtNombre.Text) && ValidaCampos(txtUsuario.Text)
+            if (ValidaCampos(txtNombre.Text) && ValidaCampos(txtUsuario.Text)
                 && ValidaCampos(txtCorreo.Text) && ValidaCampos(txtContrasena.Text) && ValidaCampos(cmbRoles.Text))
             {
-                if (lblMensajeIcono.Visible == false) 
-                { 
+                if (lblMensajeIcono.Visible == false)
+                {
                     InsertarUsuarios();
                     LimpiarCampos();
                     lblMensajeIcono.Visible = true;
@@ -126,7 +134,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
                     MessageBox.Show("Selecciona un Ícono", "Mensaje",
                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
+
             }
             else
             {
@@ -134,9 +142,9 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            
 
-            
+
+
         }
 
         private bool ValidaCampos(string cadena)
@@ -159,16 +167,16 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             parametros.Icono = ms.GetBuffer();
             parametros.Correo = txtCorreo.Text;
             parametros.Rol = cmbRoles.Text;
-            
-            
 
-            if(funcion.insertarUsuarios(parametros) == true)
+
+
+            if (funcion.insertarUsuarios(parametros) == true)
             {
                 obtenerIdUsuario();
                 InsertarPermisos();
             }
 
-            
+
         }
 
         private void EditarUsuarios()
@@ -196,9 +204,6 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
 
 
         }
-
-        
-
         private void InsertarPermisos()
         {
             foreach (DataGridViewRow row in dtgListadoPermisos.Rows)
@@ -223,8 +228,6 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             }
         }
 
-        
-
         private void EliminarPermisos()
         {
             LPermisos parametros = new LPermisos();
@@ -238,7 +241,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
         private void obtenerIdUsuario()
         {
             DUsuarios funcion = new DUsuarios();
-            funcion.ObtenerIDUsuarios(ref idusuario,txtUsuario.Text);
+            funcion.ObtenerIDUsuarios(ref idusuario, txtUsuario.Text);
         }
 
         private void AgregaNuevoIcono_Click(object sender, EventArgs e)
@@ -248,7 +251,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             OpenFileDialog.FilterIndex = 2;
             OpenFileDialog.Title = "Agrega un nuevo ícono...";
 
-            if(OpenFileDialog.ShowDialog() == DialogResult.OK)
+            if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
                 PicIcono.BackgroundImage = null;
                 PicIcono.Image = new Bitmap(OpenFileDialog.FileName);
@@ -282,7 +285,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             OcultaIconos();
         }
 
-        
+
         private void p2_Click(object sender, EventArgs e)
         {
             PicIcono.Image = p2.Image;
@@ -383,14 +386,74 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
         {
             if (e.ColumnIndex == dtgUsuarios.Columns["Editar"].Index)
             {
-                ObtenerRegistrosColumna();
+                ObtieneEstadoUsuario();
+
+                if(estado == "Eliminado")
+                {
+                    DialogResult resultado = MessageBox.Show("Este Usuario se encuentra ELIMINADO. ¿Estás seguro de Restaurarlo?", "Restaurar Usuario", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    if (resultado == DialogResult.OK)
+                    {
+                        RestaurarUsuarios();
+                    }
+                }
+                else
+                {
+                    ObtenerRegistrosColumna();
+                }
+                
             }
+            if (e.ColumnIndex == dtgUsuarios.Columns["Eliminar"].Index)
+            {
+                DialogResult resultado = MessageBox.Show("¿Estás seguro de eliminar este Registro?", "Eliminar Registro",
+                                   MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                if (resultado == DialogResult.OK)
+                {
+                    EliminarUsuarios();
+                }
+            }
+        }
+
+        private void RestaurarUsuarios()
+        {
+            ObtieneIDUsuario();
+            LUsuarios parametros = new LUsuarios();
+            DUsuarios funcion = new DUsuarios();
+            parametros.IdUsuario = idusuario;
+
+            if (funcion.RestaurarUsuarios(parametros) == true)
+            {
+                mostrarUsuarios();
+            }
+
+        }
+
+        private void EliminarUsuarios()
+        {
+            ObtieneIDUsuario();
+            LUsuarios parametros = new LUsuarios();
+            DUsuarios funcion = new DUsuarios();
+            parametros.IdUsuario = idusuario;
+
+            if (funcion.EliminarUsuarios(parametros) == true)
+            {
+                mostrarUsuarios();
+            }
+        }
+
+        private void ObtieneIDUsuario()
+        {
+            idusuario = Convert.ToInt32(dtgUsuarios.SelectedCells[2].Value);
+        } 
+        private void ObtieneEstadoUsuario()
+        {
+            estado = dtgUsuarios.SelectedCells[9].Value.ToString();
         }
 
         private void ObtenerRegistrosColumna()
         {
 
-            idusuario = Convert.ToInt32(dtgUsuarios.SelectedCells[2].Value);
+            ObtieneIDUsuario();
             txtNombre.Text = dtgUsuarios.SelectedCells[3].Value.ToString();
             txtUsuario.Text = dtgUsuarios.SelectedCells[4].Value.ToString();
             txtContrasena.Text = dtgUsuarios.SelectedCells[5].Value.ToString();
@@ -400,7 +463,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             PicIcono.Image = Image.FromStream(ms);
             txtCorreo.Text = dtgUsuarios.SelectedCells[7].Value.ToString();
             cmbRoles.Text = dtgUsuarios.SelectedCells[8].Value.ToString();
-            estado = dtgUsuarios.SelectedCells[9].Value.ToString();
+            
             
             panel_Registro.Visible = true;
             panel_Registro.Dock = DockStyle.Fill;
@@ -464,6 +527,11 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
                 MessageBox.Show("No puedes dejar en blanco los campos.", "Mensaje",
                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void txtBuscarUsuario_TextChanged(object sender, EventArgs e)
+        {
+            BuscarUsuarios();
         }
     }
 }
