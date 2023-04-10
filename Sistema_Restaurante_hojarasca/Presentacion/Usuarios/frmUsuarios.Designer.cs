@@ -78,6 +78,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             this.Eliminar = new System.Windows.Forms.DataGridViewImageColumn();
             this.Editar = new System.Windows.Forms.DataGridViewImageColumn();
             this.Marcar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel_Registro.SuspendLayout();
@@ -149,6 +150,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             // 
             // panel_Registro
             // 
+            this.panel_Registro.Controls.Add(this.label9);
             this.panel_Registro.Controls.Add(this.panelIconos);
             this.panel_Registro.Controls.Add(this.lblMensajeIcono);
             this.panel_Registro.Controls.Add(this.flowLayoutPanel1);
@@ -301,9 +303,14 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             this.txtContrasena.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtContrasena.Font = new System.Drawing.Font("Inter V", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtContrasena.Location = new System.Drawing.Point(210, 162);
+            this.txtContrasena.MaxLength = 6;
             this.txtContrasena.Name = "txtContrasena";
-            this.txtContrasena.Size = new System.Drawing.Size(232, 30);
+            this.txtContrasena.PasswordChar = '*';
+            this.txtContrasena.Size = new System.Drawing.Size(166, 30);
             this.txtContrasena.TabIndex = 2;
+            this.txtContrasena.UseSystemPasswordChar = true;
+            this.txtContrasena.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtContrasena_KeyDown);
+            this.txtContrasena.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContrasena_KeyPress);
             this.txtContrasena.Validated += new System.EventHandler(this.txtContrasena_Validated);
             // 
             // txtCorreo
@@ -323,8 +330,9 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             this.txtUsuario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtUsuario.Font = new System.Drawing.Font("Inter V", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUsuario.Location = new System.Drawing.Point(210, 106);
+            this.txtUsuario.MaxLength = 15;
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(212, 30);
+            this.txtUsuario.Size = new System.Drawing.Size(235, 30);
             this.txtUsuario.TabIndex = 1;
             this.txtUsuario.Validated += new System.EventHandler(this.txtUsuario_Validated);
             // 
@@ -703,6 +711,17 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             this.Marcar.HeaderText = "Marcar";
             this.Marcar.Name = "Marcar";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Inter V", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label9.Location = new System.Drawing.Point(382, 162);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(102, 30);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Se permite \r\nhasta 6 números.";
+            // 
             // frmUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -783,5 +802,6 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
         private System.Windows.Forms.DataGridViewImageColumn Editar;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn2;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Marcar;
+        private System.Windows.Forms.Label label9;
     }
 }

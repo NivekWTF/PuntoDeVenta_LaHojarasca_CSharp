@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Sistema_Restaurante_hojarasca.Datos;
 using Sistema_Restaurante_hojarasca.Logica;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
 {
@@ -170,6 +171,21 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
                 return false;
 
             return true;
+        }
+
+        private bool ValidaContraseñas(string contraseña)
+        {
+            
+            string passwordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,}$";
+
+            if (Regex.IsMatch(contraseña, passwordRegex))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void InsertarUsuarios()
@@ -352,6 +368,8 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
                 errorProvider1.SetError(txtNombre, "No puedes dejar este campo vacío");
                 txtNombre.Focus();
             }
+
+            
         }
 
         private void txtUsuario_Validated(object sender, EventArgs e)
@@ -397,6 +415,8 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
                 errorProvider1.SetError(txtContrasena, "No puedes dejar este campo vacío");
                 txtContrasena.Focus();
             }
+
+
         }
 
         private void dtgUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -404,6 +424,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             if (e.ColumnIndex == dtgUsuarios.Columns["Editar"].Index)
             {
                 ObtieneEstadoUsuario();
+                btnGuardarUsuario.Enabled = false;
 
                 if(estado == "Eliminado")
                 {
@@ -549,6 +570,27 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
         private void txtBuscarUsuario_TextChanged(object sender, EventArgs e)
         {
             BuscarUsuarios();
+        }
+
+        private void txtContrasena_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+        }
+
+        private void txtContrasena_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
     }
 }
