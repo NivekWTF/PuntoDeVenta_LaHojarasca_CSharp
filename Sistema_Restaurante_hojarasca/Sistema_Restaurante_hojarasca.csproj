@@ -54,6 +54,7 @@
     <Compile Include="Datos\DModulos.cs" />
     <Compile Include="Datos\DPermisos.cs" />
     <Compile Include="Datos\DUsuarios.cs" />
+    <Compile Include="Logica\Bases.cs" />
     <Compile Include="Logica\LModulos.cs" />
     <Compile Include="Logica\LPermisos.cs" />
     <Compile Include="Logica\LUsuarios.cs" />

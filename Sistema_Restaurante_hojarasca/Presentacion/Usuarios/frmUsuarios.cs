@@ -33,7 +33,11 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             DUsuarios funcion = new DUsuarios();
             funcion.MostrarUsuarios(ref dt);
             dtgUsuarios.DataSource = dt;
+            Bases propiedad = new Bases();
+            propiedad.DisenioDataGridView(ref dtgUsuarios);
         }
+
+        
 
         private void BuscarUsuarios()
         {
