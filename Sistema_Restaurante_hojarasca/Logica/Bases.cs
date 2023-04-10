@@ -20,5 +20,19 @@ namespace Sistema_Restaurante_hojarasca.Logica
             cabecera.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular);
             Listado.ColumnHeadersDefaultCellStyle = cabecera;
         }
+
+        public void DisenioEliminados(ref DataGridView Listado)
+        {
+            foreach (DataGridViewRow row in Listado.Rows)
+            {
+                string estado;
+                estado = row.Cells["Estado_Icono"].Value.ToString();
+                if (estado == "Eliminado")
+                {
+                    row.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Strikeout | FontStyle.Bold);
+                    row.DefaultCellStyle.ForeColor = Color.Red;
+                }
+            }
+        }
     }
 }

@@ -33,11 +33,23 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             DUsuarios funcion = new DUsuarios();
             funcion.MostrarUsuarios(ref dt);
             dtgUsuarios.DataSource = dt;
-            Bases propiedad = new Bases();
-            propiedad.DisenioDataGridView(ref dtgUsuarios);
+            DesignDataGridViewModifier();
+            OcultarColumnas();
         }
 
-        
+        private void OcultarColumnas()
+        {
+            dtgUsuarios.Columns[2].Visible = false;
+            dtgUsuarios.Columns[6].Visible = false;
+            dtgUsuarios.Columns[7].Visible = false;
+        }
+
+        private void DesignDataGridViewModifier()
+        {
+            Bases propiedad = new Bases();
+            propiedad.DisenioDataGridView(ref dtgUsuarios);
+            propiedad.DisenioEliminados(ref dtgUsuarios);
+        }
 
         private void BuscarUsuarios()
         {
@@ -45,6 +57,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             DUsuarios funcion = new DUsuarios();
             funcion.buscarUsuarios(ref dt, txtBuscarUsuario.Text);
             dtgUsuarios.DataSource = dt;
+            DesignDataGridViewModifier();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
