@@ -16,6 +16,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
     public partial class frmUsuarios : Form
     {
         int idusuario;
+        string estado;
         public frmUsuarios()
         {
             InitializeComponent();
@@ -23,7 +24,15 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
 
         private void frmUsuarios_Load(object sender, EventArgs e)
         {
+            mostrarUsuarios();
+        }
 
+        private void mostrarUsuarios()
+        {
+            DataTable dt = new DataTable();
+            DUsuarios funcion = new DUsuarios();
+            funcion.MostrarUsuarios(ref dt);
+            dtgUsuarios.DataSource = dt;
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -103,12 +112,21 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
         private void btnGuardarUsuario_Click(object sender, EventArgs e)
         {
             if(ValidaCampos(txtNombre.Text) && ValidaCampos(txtUsuario.Text)
-                && ValidaCampos(txtCorreo.Text) && ValidaCampos(txtContrasena.Text))
+                && ValidaCampos(txtCorreo.Text) && ValidaCampos(txtContrasena.Text) && ValidaCampos(cmbRoles.Text))
             {
-                InsertarUsuarios();
-                LimpiarCampos();
-                lblMensajeIcono.Visible = true;
-                cmbRoles.SelectedIndex = 0;
+                if (lblMensajeIcono.Visible == false) 
+                { 
+                    InsertarUsuarios();
+                    LimpiarCampos();
+                    lblMensajeIcono.Visible = true;
+                    cmbRoles.SelectedIndex = 0;
+                }
+                else
+                {
+                    MessageBox.Show("Selecciona un Ícono", "Mensaje",
+                                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
             }
             else
             {
@@ -128,8 +146,6 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
 
             return true;
         }
-
-       
 
         private void InsertarUsuarios()
         {
@@ -155,6 +171,34 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             
         }
 
+        private void EditarUsuarios()
+        {
+            LUsuarios parametros = new LUsuarios();
+            DUsuarios funcion = new DUsuarios();
+            parametros.IdUsuario = idusuario;
+            parametros.Nombre = txtNombre.Text;
+            parametros.Login = txtUsuario.Text;
+            parametros.Password = txtContrasena.Text;
+            MemoryStream ms = new MemoryStream();
+            PicIcono.Image.Save(ms, PicIcono.Image.RawFormat);
+            parametros.Icono = ms.GetBuffer();
+            parametros.Correo = txtCorreo.Text;
+            parametros.Rol = cmbRoles.Text;
+
+
+
+            if (funcion.EditarUsuarios(parametros) == true)
+            {
+                EliminarPermisos();
+                InsertarPermisos();
+
+            }
+
+
+        }
+
+        
+
         private void InsertarPermisos()
         {
             foreach (DataGridViewRow row in dtgListadoPermisos.Rows)
@@ -172,10 +216,23 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
 
                     if (funcion.Insertar_Permisos(parametros) == true)
                     {
-                        MessageBox.Show("Registrado con éxito!");
+                        mostrarUsuarios();
+                        panel_Registro.Visible = false;
                     }
                 }
             }
+        }
+
+        
+
+        private void EliminarPermisos()
+        {
+            LPermisos parametros = new LPermisos();
+            DPermisos funcion = new DPermisos();
+
+            parametros.Id_Usuario = idusuario;
+            funcion.EliminarPermisos(parametros);
+
         }
 
         private void obtenerIdUsuario()
@@ -319,6 +376,93 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             {
                 errorProvider1.SetError(txtContrasena, "No puedes dejar este campo vacío");
                 txtContrasena.Focus();
+            }
+        }
+
+        private void dtgUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dtgUsuarios.Columns["Editar"].Index)
+            {
+                ObtenerRegistrosColumna();
+            }
+        }
+
+        private void ObtenerRegistrosColumna()
+        {
+
+            idusuario = Convert.ToInt32(dtgUsuarios.SelectedCells[2].Value);
+            txtNombre.Text = dtgUsuarios.SelectedCells[3].Value.ToString();
+            txtUsuario.Text = dtgUsuarios.SelectedCells[4].Value.ToString();
+            txtContrasena.Text = dtgUsuarios.SelectedCells[5].Value.ToString();
+            PicIcono.Image = null;
+            byte[] b = (byte[])(dtgUsuarios.SelectedCells[6].Value);
+            MemoryStream ms = new MemoryStream(b);
+            PicIcono.Image = Image.FromStream(ms);
+            txtCorreo.Text = dtgUsuarios.SelectedCells[7].Value.ToString();
+            cmbRoles.Text = dtgUsuarios.SelectedCells[8].Value.ToString();
+            estado = dtgUsuarios.SelectedCells[9].Value.ToString();
+            
+            panel_Registro.Visible = true;
+            panel_Registro.Dock = DockStyle.Fill;
+            lblMensajeIcono.Visible = false;
+            CargaModulos();
+            MostrarPermisos();
+
+
+        }
+
+        private void MostrarPermisos()
+        {
+            DataTable dt = new DataTable();
+            DPermisos funcion = new DPermisos();
+            LPermisos parametros = new LPermisos();
+            parametros.Id_Usuario = idusuario;
+            funcion.MostrarPermisos(ref dt, parametros);
+
+            foreach (DataRow rowPermisos in dt.Rows)
+            {
+                int idModuloPermisos = Convert.ToInt32(rowPermisos["Id_Modulo"]);
+                foreach (DataGridViewRow rowModulos in dtgListadoPermisos.Rows)
+                {
+                    int idModulo = Convert.ToInt32(rowModulos.Cells["IdModulo"].Value);
+                    
+                    if (idModuloPermisos == idModulo)
+                    {
+                        rowModulos.Cells[0].Value = true;
+                    }
+                }
+            }
+
+        }
+
+        private void btnRegresar_Click(object sender, EventArgs e)
+        {
+            panel_Registro.Visible = false;
+        }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            if (ValidaCampos(txtNombre.Text) && ValidaCampos(txtUsuario.Text)
+                && ValidaCampos(txtCorreo.Text) && ValidaCampos(txtContrasena.Text) && ValidaCampos(cmbRoles.Text))
+            {
+                if (lblMensajeIcono.Visible == false)
+                {
+                    EditarUsuarios();
+                    LimpiarCampos();
+                    lblMensajeIcono.Visible = true;
+                    cmbRoles.SelectedIndex = 0;
+                }
+                else
+                {
+                    MessageBox.Show("Selecciona un Ícono", "Mensaje",
+                                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("No puedes dejar en blanco los campos.", "Mensaje",
+                                   MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

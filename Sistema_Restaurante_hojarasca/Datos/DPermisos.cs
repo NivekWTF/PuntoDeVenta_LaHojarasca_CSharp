@@ -62,14 +62,14 @@ namespace Sistema_Restaurante_hojarasca.Datos
             }
         }
 
-        public bool EliminarUsuarios(LUsuarios parametros)
+        public bool EliminarPermisos(LPermisos parametros)
         {
             try
             {
                 CONEXIONMAESTRA.abrir();
                 SqlCommand cmd = new SqlCommand("eliminar_Permisos", CONEXIONMAESTRA.conectar);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@IdUsuario", parametros.IdUsuario);
+                cmd.Parameters.AddWithValue("@IdUsuario", parametros.Id_Usuario);
                 cmd.ExecuteNonQuery();
                 return true;
 
@@ -85,12 +85,14 @@ namespace Sistema_Restaurante_hojarasca.Datos
             }
         }
 
-        public void MostrarPermisos(ref DataTable dt)
+        public void MostrarPermisos(ref DataTable dt, LPermisos parametros)
         {
             try
             {
                 CONEXIONMAESTRA.abrir();
                 SqlDataAdapter da = new SqlDataAdapter("mostrar_Permisos_", CONEXIONMAESTRA.conectar);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand.Parameters.AddWithValue("@idusuario", parametros.Id_Usuario);
                 da.Fill(dt);
 
             }
