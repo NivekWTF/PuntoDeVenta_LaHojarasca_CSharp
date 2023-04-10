@@ -64,11 +64,17 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             LimpiarCampos();
+
             panel_Registro.Visible = true;
             lblMensajeIcono.Visible = true;
+
             CargaModulos();
+
             panel_Registro.BringToFront();
             panel_Registro.Dock = DockStyle.Fill;
+
+            btnGuardarUsuario.Enabled = true;
+            btnGuardarUsuario.BackgroundImage = Properties.Resources.verde;
 
         }
 
@@ -149,7 +155,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
                 }
                 else
                 {
-                    MessageBox.Show("Selecciona un Ícono", "Mensaje",
+                    MessageBox.Show("Seleccione un Ícono", "Mensaje",
                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
@@ -173,28 +179,14 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             return true;
         }
 
-        private bool ValidaContraseñas(string contraseña)
-        {
-            
-            string passwordRegex = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,}$";
-
-            if (Regex.IsMatch(contraseña, passwordRegex))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
+        
         private void InsertarUsuarios()
         {
             LUsuarios parametros = new LUsuarios();
             DUsuarios funcion = new DUsuarios();
             parametros.Nombre = txtNombre.Text;
             parametros.Login = txtUsuario.Text;
-            parametros.Password = txtContrasena.Text;
+            parametros.Password = Bases.Encriptar(txtContrasena.Text);
             MemoryStream ms = new MemoryStream();
             PicIcono.Image.Save(ms, PicIcono.Image.RawFormat);
             parametros.Icono = ms.GetBuffer();
@@ -219,7 +211,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             parametros.IdUsuario = idusuario;
             parametros.Nombre = txtNombre.Text;
             parametros.Login = txtUsuario.Text;
-            parametros.Password = txtContrasena.Text;
+            parametros.Password = Bases.Encriptar(txtContrasena.Text);
             MemoryStream ms = new MemoryStream();
             PicIcono.Image.Save(ms, PicIcono.Image.RawFormat);
             parametros.Icono = ms.GetBuffer();
@@ -306,7 +298,6 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             panelIconos.BringToFront();
         }
 
-
         private void btnVolverRegistro_Click(object sender, EventArgs e)
         {
             panelIconos.Visible = false;
@@ -317,7 +308,6 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             PicIcono.Image = p1.Image;
             OcultaIconos();
         }
-
 
         private void p2_Click(object sender, EventArgs e)
         {
@@ -425,8 +415,9 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             {
                 ObtieneEstadoUsuario();
                 btnGuardarUsuario.Enabled = false;
+                btnGuardarUsuario.BackgroundImage = Properties.Resources.verde_disable;
 
-                if(estado == "Eliminado")
+                if (estado == "Eliminado")
                 {
                     DialogResult resultado = MessageBox.Show("Este Usuario se encuentra ELIMINADO. ¿Estás seguro de Restaurarlo?", "Restaurar Usuario", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                     if (resultado == DialogResult.OK)
@@ -494,7 +485,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Usuarios
             ObtieneIDUsuario();
             txtNombre.Text = dtgUsuarios.SelectedCells[3].Value.ToString();
             txtUsuario.Text = dtgUsuarios.SelectedCells[4].Value.ToString();
-            txtContrasena.Text = dtgUsuarios.SelectedCells[5].Value.ToString();
+            txtContrasena.Text = Bases.Desencriptar(dtgUsuarios.SelectedCells[5].Value.ToString());
             PicIcono.Image = null;
             byte[] b = (byte[])(dtgUsuarios.SelectedCells[6].Value);
             MemoryStream ms = new MemoryStream(b);
