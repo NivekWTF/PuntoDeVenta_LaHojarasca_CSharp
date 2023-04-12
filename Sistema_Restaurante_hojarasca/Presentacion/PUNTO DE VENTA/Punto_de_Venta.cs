@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 using System.IO;
 using Sistema_Restaurante_hojarasca.Datos;
 
-namespace Sistema_Restaurante_hojarasca.MODULOS.PUNTO_DE_VENTA
+namespace Sistema_Restaurante_hojarasca.Presentacion.PUNTO_DE_VENTA
 {
     public partial class Punto_de_Venta : Form
     {

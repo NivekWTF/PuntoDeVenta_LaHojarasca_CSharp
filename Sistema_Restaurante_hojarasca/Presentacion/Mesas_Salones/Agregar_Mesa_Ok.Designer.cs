@@ -1,5 +1,5 @@
 ﻿
-namespace Sistema_Restaurante_hojarasca.MODULOS
+namespace Sistema_Restaurante_hojarasca.Presentacion.Mesas
 {
     partial class Agregar_Mesa_Ok
     {

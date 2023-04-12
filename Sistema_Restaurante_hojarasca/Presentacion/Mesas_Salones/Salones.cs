@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Sistema_Restaurante_hojarasca.Datos;
 
-namespace Sistema_Restaurante_hojarasca.MODULOS.Mesas
+namespace Sistema_Restaurante_hojarasca.Presentacion.Mesas
 {
     public partial class Salones : Form
     {
@@ -212,7 +212,7 @@ namespace Sistema_Restaurante_hojarasca.MODULOS.Mesas
 
         private void btnAgregarSalon_Click_1(object sender, EventArgs e)
         {
-            MODULOS.Mesas.Configurar_Mesas frm = new MODULOS.Mesas.Configurar_Mesas();
+            Configurar_Mesas frm = new Configurar_Mesas();
             frm.FormClosed += new FormClosedEventHandler(frm_FormClosed);
             frm.ShowDialog();
         }

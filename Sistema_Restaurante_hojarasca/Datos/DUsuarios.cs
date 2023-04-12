@@ -178,5 +178,44 @@ namespace Sistema_Restaurante_hojarasca.Datos
             }
         }
 
+        public void DibujarUsuarios(ref DataTable dt)
+        {
+            try
+            {
+                CONEXIONMAESTRA.abrir();
+                SqlDataAdapter da = new SqlDataAdapter("mostrar_UsuariosActivos", CONEXIONMAESTRA.conectar);
+                da.Fill(dt);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.StackTrace);
+            }
+            finally
+            {
+                CONEXIONMAESTRA.Cerrar();
+            }
+        }
+
+        public void validarUsuarios(LUsuarios parametros, ref int id)
+        {
+            try
+            {
+                CONEXIONMAESTRA.abrir();
+                SqlCommand cmd = new SqlCommand("validarUsuario", CONEXIONMAESTRA.conectar);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@password", parametros.Password);
+                cmd.Parameters.AddWithValue("@login", parametros.Login);
+                id = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                id = 0;
+            }
+            finally
+            {
+                CONEXIONMAESTRA.Cerrar();
+            }
+        }
     }
 }

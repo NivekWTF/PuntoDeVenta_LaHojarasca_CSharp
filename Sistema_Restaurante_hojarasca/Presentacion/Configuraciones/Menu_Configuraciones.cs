@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Sistema_Restaurante_hojarasca.MODULOS.Configuraciones
+namespace Sistema_Restaurante_hojarasca.Presentacion.Configuraciones
 {
     public partial class Menu_Configuraciones : Form
     {

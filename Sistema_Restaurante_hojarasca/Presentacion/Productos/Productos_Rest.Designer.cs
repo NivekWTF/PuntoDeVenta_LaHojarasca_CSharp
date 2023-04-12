@@ -1,5 +1,5 @@
 ﻿
-namespace Sistema_Restaurante_hojarasca.MODULOS.Productos
+namespace Sistema_Restaurante_hojarasca.Presentacion.Productos
 {
     partial class Productos_Rest
     {

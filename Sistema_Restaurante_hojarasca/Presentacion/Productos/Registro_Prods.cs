@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using Sistema_Restaurante_hojarasca.Datos;
 
-namespace Sistema_Restaurante_hojarasca.MODULOS.Productos
+namespace Sistema_Restaurante_hojarasca.Presentacion.Productos
 {
     public partial class Registro_Prods : Form
     {

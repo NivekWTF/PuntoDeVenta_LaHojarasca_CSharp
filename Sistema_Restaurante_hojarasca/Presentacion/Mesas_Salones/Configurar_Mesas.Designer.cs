@@ -1,5 +1,5 @@
 ﻿
-namespace Sistema_Restaurante_hojarasca.MODULOS.Mesas
+namespace Sistema_Restaurante_hojarasca.Presentacion.Mesas
 {
     partial class Configurar_Mesas
     {

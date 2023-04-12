@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using Sistema_Restaurante_hojarasca.Datos;
 
-namespace Sistema_Restaurante_hojarasca.MODULOS
+namespace Sistema_Restaurante_hojarasca.Presentacion.Mesas
 {
     public partial class Agregar_Mesa_Ok : Form
     {
@@ -15,7 +15,7 @@ namespace Sistema_Restaurante_hojarasca.MODULOS
         private void Agregar_Mesa_Ok_Load(object sender, EventArgs e)
         {
             this.FormBorderStyle = FormBorderStyle.None;
-            txtMesaEdicion.Text = MODULOS.Mesas.Salones.nombre_mesa;
+            txtMesaEdicion.Text = Salones.nombre_mesa;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -34,7 +34,7 @@ namespace Sistema_Restaurante_hojarasca.MODULOS
                 SqlCommand cmd = new SqlCommand("EDITAR_MESA", CONEXIONMAESTRA.conectar);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@mesa", txtMesaEdicion.Text);
-                cmd.Parameters.AddWithValue("@id_mesa", MODULOS.Mesas.Salones.idMesa);
+                cmd.Parameters.AddWithValue("@id_mesa", Salones.idMesa);
                 cmd.ExecuteNonQuery();
                 CONEXIONMAESTRA.Cerrar();
                 Close();

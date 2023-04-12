@@ -5,7 +5,7 @@ using System.Drawing;
 using System.IO;
 using Sistema_Restaurante_hojarasca.Datos;
 
-namespace Sistema_Restaurante_hojarasca.MODULOS.Productos
+namespace Sistema_Restaurante_hojarasca.Presentacion.Productos
 {
     public partial class Productos_Rest : Form
     {

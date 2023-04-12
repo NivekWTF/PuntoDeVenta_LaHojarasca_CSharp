@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using Sistema_Restaurante_hojarasca.Datos;
 
-namespace Sistema_Restaurante_hojarasca.MODULOS.Mesas
+namespace Sistema_Restaurante_hojarasca.Presentacion.Mesas
 {
     public partial class Configurar_Mesas : Form
     {
