@@ -17,6 +17,7 @@ namespace Sistema_Restaurante_hojarasca
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            //Presentacion.Usuarios.frmUsuarios frm = new Presentacion.Usuarios.frmUsuarios();
             Presentacion.Login.frmLogin frm = new Presentacion.Login.frmLogin();
             //MODULOS.PUNTO_DE_VENTA.Visor_De_Mesas frm_visor_de_mesas = new MODULOS.PUNTO_DE_VENTA.Visor_De_Mesas();
             frm.FormClosed += frm_closed;

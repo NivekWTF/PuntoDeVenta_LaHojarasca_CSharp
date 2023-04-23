@@ -101,9 +101,10 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
             this.panel_visor_Usuarios.Controls.Add(this.panel4);
             this.panel_visor_Usuarios.Controls.Add(this.panel3);
             this.panel_visor_Usuarios.Controls.Add(this.panel2);
-            this.panel_visor_Usuarios.Location = new System.Drawing.Point(27, 40);
+            this.panel_visor_Usuarios.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel_visor_Usuarios.Location = new System.Drawing.Point(0, 0);
             this.panel_visor_Usuarios.Name = "panel_visor_Usuarios";
-            this.panel_visor_Usuarios.Size = new System.Drawing.Size(565, 630);
+            this.panel_visor_Usuarios.Size = new System.Drawing.Size(1490, 861);
             this.panel_visor_Usuarios.TabIndex = 0;
             // 
             // PanelUsuarios
@@ -113,7 +114,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
             this.PanelUsuarios.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelUsuarios.Location = new System.Drawing.Point(50, 142);
             this.PanelUsuarios.Name = "PanelUsuarios";
-            this.PanelUsuarios.Size = new System.Drawing.Size(465, 488);
+            this.PanelUsuarios.Size = new System.Drawing.Size(1390, 719);
             this.PanelUsuarios.TabIndex = 3;
             // 
             // PanelMostradorUsuarios
@@ -122,7 +123,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
             this.PanelMostradorUsuarios.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelMostradorUsuarios.Location = new System.Drawing.Point(0, 128);
             this.PanelMostradorUsuarios.Name = "PanelMostradorUsuarios";
-            this.PanelMostradorUsuarios.Size = new System.Drawing.Size(465, 360);
+            this.PanelMostradorUsuarios.Size = new System.Drawing.Size(1390, 591);
             this.PanelMostradorUsuarios.TabIndex = 3;
             // 
             // panel15
@@ -169,7 +170,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(465, 128);
+            this.label2.Size = new System.Drawing.Size(1390, 128);
             this.label2.TabIndex = 2;
             this.label2.Text = "¿Quién está Iniciando Sesión?";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -177,9 +178,9 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
             // panel4
             // 
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(515, 142);
+            this.panel4.Location = new System.Drawing.Point(1440, 142);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(50, 488);
+            this.panel4.Size = new System.Drawing.Size(50, 719);
             this.panel4.TabIndex = 5;
             // 
             // panel3
@@ -187,7 +188,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 142);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(50, 488);
+            this.panel3.Size = new System.Drawing.Size(50, 719);
             this.panel3.TabIndex = 4;
             // 
             // panel2
@@ -196,7 +197,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(565, 142);
+            this.panel2.Size = new System.Drawing.Size(1490, 142);
             this.panel2.TabIndex = 2;
             // 
             // panel1
@@ -235,10 +236,9 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
             // 
             this.PanelContraseña.Controls.Add(this.panel6);
             this.PanelContraseña.Controls.Add(this.panel5);
-            this.PanelContraseña.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelContraseña.Location = new System.Drawing.Point(0, 0);
+            this.PanelContraseña.Location = new System.Drawing.Point(677, 57);
             this.PanelContraseña.Name = "PanelContraseña";
-            this.PanelContraseña.Size = new System.Drawing.Size(1490, 861);
+            this.PanelContraseña.Size = new System.Drawing.Size(1355, 824);
             this.PanelContraseña.TabIndex = 1;
             this.PanelContraseña.Visible = false;
             // 
@@ -249,7 +249,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(348, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1142, 861);
+            this.panel6.Size = new System.Drawing.Size(1007, 824);
             this.panel6.TabIndex = 1;
             // 
             // panel_IngresarContraseña
@@ -637,13 +637,13 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
             this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(348, 861);
+            this.panel5.Size = new System.Drawing.Size(348, 824);
             this.panel5.TabIndex = 0;
             // 
             // panel9
             // 
             this.panel9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel9.Location = new System.Drawing.Point(0, 730);
+            this.panel9.Location = new System.Drawing.Point(0, 693);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(348, 23);
             this.panel9.TabIndex = 4;
@@ -652,7 +652,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
             // 
             this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pictureBox3.Image = global::Sistema_Restaurante_hojarasca.Properties.Resources.logo_sg_designs_vector;
-            this.pictureBox3.Location = new System.Drawing.Point(0, 753);
+            this.pictureBox3.Location = new System.Drawing.Point(0, 716);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(348, 78);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -662,7 +662,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
             // panel8
             // 
             this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel8.Location = new System.Drawing.Point(0, 831);
+            this.panel8.Location = new System.Drawing.Point(0, 794);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(348, 30);
             this.panel8.TabIndex = 2;
@@ -673,7 +673,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
             this.pictureBox2.Image = global::Sistema_Restaurante_hojarasca.Properties.Resources.logo;
             this.pictureBox2.Location = new System.Drawing.Point(0, 120);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(348, 741);
+            this.pictureBox2.Size = new System.Drawing.Size(348, 704);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;

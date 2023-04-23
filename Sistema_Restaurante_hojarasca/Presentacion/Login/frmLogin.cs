@@ -66,10 +66,13 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
                 lbl1.TextAlign = ContentAlignment.MiddleCenter;
                 lbl1.Cursor = Cursors.Hand;
                 
+                
 
                 p.Size = new Size(194, 250);
                 p.BorderStyle = BorderStyle.None;
                 p.BackColor = Color.FromArgb(20, 20, 20);
+                p.Margin = new Padding(15, 15, 15, 15);
+                
 
                 pictureBox.BackgroundImage = null;
                 byte[] bi = (Byte[])dataRow["Icono"];
@@ -83,10 +86,12 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
                 pictureBox.Elipse = true;
                 pictureBox.Dock = DockStyle.Top;
                 pictureBox.SendToBack();
+                
 
                 p.Controls.Add(lbl1);
                 p.Controls.Add(pictureBox);
                 PanelMostradorUsuarios.Controls.Add(p);
+
 
                 lbl1.Click += Lbl1_Click;
                 pictureBox.Click += PictureBox_Click;
@@ -112,6 +117,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
             panel_visor_Usuarios.Visible = false;
             PanelContraseña.Visible = true;
             PanelContraseña.Dock = DockStyle.Fill;
+            panel_IngresarContraseña.Location = new Point((panel6.Width - panel_IngresarContraseña.Width) / 2, (panel6.Height - panel_IngresarContraseña.Height) / 2);
             //MessageBox.Show(Login);
         }
 
@@ -200,6 +206,11 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
             {
                 txtContraseña.Text = txtContraseña.Text.Substring(0, txtContraseña.Text.Count() - 1);
             }
+        }
+
+        private void btnCambiarUsuario_Click(object sender, EventArgs e)
+        {
+            PanelContraseña.Visible = true;
         }
     }
 }
