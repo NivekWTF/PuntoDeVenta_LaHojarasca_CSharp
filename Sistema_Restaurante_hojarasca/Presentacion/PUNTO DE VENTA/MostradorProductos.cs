@@ -18,11 +18,17 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.PUNTO_DE_VENTA
 
         int PaginaInicio = 1;
         int PaginaMaxima = 50;
-        
         int cantidad_productos = 0;
+
+        int id_grupo;
+        int idproducto;
+
+        double precioVenta;
 
         private Button paginadorSiguiente = new Button();
         private Button paginadorAtras = new Button();
+
+        
 
         private void MostradorProductos_Load(object sender, EventArgs e)
         {
@@ -104,14 +110,32 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.PUNTO_DE_VENTA
 
                     lbl.BringToFront();
                     PanelProductos.Controls.Add(p1);
+                    img1.Click += Img1_Click;
+                    lbl.Click += Lbl_Click;
                 }
-                CONEXIONMAESTRA.Cerrar();
+                
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.StackTrace);
+                
+            }
+            finally
+            {
                 CONEXIONMAESTRA.Cerrar();
             }
+        }
+
+        private void Lbl_Click(object sender, EventArgs e)
+        {
+            idproducto = Convert.ToInt32(((Label)sender).Name);
+            precioVenta = Convert.ToDouble(((Label)sender).Tag);
+            Punto_de_Venta._Puerta.InsertarVenta();
+        }
+
+        private void Img1_Click(object sender, EventArgs e)
+        {
+            
         }
 
         private void btnAtras_Click(object sender, EventArgs e)

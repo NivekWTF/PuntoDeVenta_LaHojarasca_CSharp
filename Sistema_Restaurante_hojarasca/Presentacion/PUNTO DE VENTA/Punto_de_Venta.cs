@@ -19,12 +19,16 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.PUNTO_DE_VENTA
         {
             InitializeComponent();
         }
+
         int PaginaIncio=1;
         int PaginaMaxima=10;
         public static int idGrupo;
         int cantidad_Grupos;
+
         private Button btnPaginaSiguiente = new Button();
         private Button btnPaginaAtras = new Button();
+
+        public static Punto_de_Venta _Puerta;
 
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -42,6 +46,21 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.PUNTO_DE_VENTA
             dibujarGrupos();
             contar_Grupos();
         
+        }
+
+        public static Punto_de_Venta Puerta
+        {
+            get
+            {
+                if(_Puerta == null  || _Puerta.IsDisposed)
+                    _Puerta = new Punto_de_Venta();
+               return _Puerta;
+
+            }
+        }
+        public void InsertarVenta()
+        {
+
         }
 
         void contar_Grupos()
