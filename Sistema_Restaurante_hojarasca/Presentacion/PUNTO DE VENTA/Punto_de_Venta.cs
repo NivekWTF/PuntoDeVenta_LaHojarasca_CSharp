@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.IO;
 using Sistema_Restaurante_hojarasca.Datos;
+using Sistema_Restaurante_hojarasca.Logica;
 
 namespace Sistema_Restaurante_hojarasca.Presentacion.PUNTO_DE_VENTA
 {
@@ -60,7 +61,30 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.PUNTO_DE_VENTA
         }
         public void InsertarVenta()
         {
+            LVentas parametros = new LVentas();
+            DVentas funcion = new DVentas();
 
+            parametros.fecha_venta = DateTime.Now;
+            parametros.Id_Usuario = ;
+            parametros.Accion = "VENTA";
+            parametros.ID_caja = "";
+            parametros.Id_Mesa = ;
+            parametros.Numero_Personas = ;
+            parametros.Lugar_Consumo = ;
+
+            if (funcion.Insertar_Ventas(parametros) == true)
+            {
+
+            }
+
+
+            //    cmd.Parameters.AddWithValue("@fecha_venta", parametros.fecha_venta);
+            //cmd.Parameters.AddWithValue("@Id_Usuario", parametros.Id_Usuario);
+            //cmd.Parameters.AddWithValue("@Accion", parametros.Accion);
+            //cmd.Parameters.AddWithValue("@ID_caja", parametros.ID_caja);
+            //cmd.Parameters.AddWithValue("@Id_Mesa", parametros.Id_Mesa);
+            //cmd.Parameters.AddWithValue("@Numero_Personas", parametros.Numero_Personas);
+            //cmd.Parameters.AddWithValue("@Lugar_Consumo", parametros.Lugar_Consumo);
         }
 
         void contar_Grupos()

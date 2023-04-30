@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Security.Cryptography;
 using Sistema_Restaurante_hojarasca.LIBRERIAS;
+using System.Management;
 
 namespace Sistema_Restaurante_hojarasca.Logica
 {
@@ -73,6 +74,13 @@ namespace Sistema_Restaurante_hojarasca.Logica
                 tempDesencriptar = UnicodeEncoding.ASCII.GetString(desencrypta.TransformFinalBlock(buff, 0, buff.Length));
             }
             return tempDesencriptar;
+        }
+
+        public static void Obtener_SerialPC(ref string serial)
+        {
+            ManagementObject serialPC = new ManagementObject("Win32_PhysicalMedia='\\\\.\\PHYSICALDRIVE0'");
+            serial = serialPC.Properties["SerialNumber"].Value.ToString();
+            serial = Encriptar(serial.Trim());
         }
     }
 }

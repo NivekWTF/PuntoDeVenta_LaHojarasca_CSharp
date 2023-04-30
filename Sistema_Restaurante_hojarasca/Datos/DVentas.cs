@@ -12,14 +12,13 @@ namespace Sistema_Restaurante_hojarasca.Datos
 {
     public class DVentas
     {
-        private void Insertar_Ventas(LVentas parametros)
+        public bool Insertar_Ventas(LVentas parametros)
         {
             try
             {              
                 CONEXIONMAESTRA.abrir();
                 SqlCommand cmd = new SqlCommand("Insertar_Ventas", CONEXIONMAESTRA.conectar);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@idClienteV", parametros.idClienteV);
                 cmd.Parameters.AddWithValue("@fecha_venta", parametros.fecha_venta);
                 cmd.Parameters.AddWithValue("@Id_Usuario", parametros.Id_Usuario);
                 cmd.Parameters.AddWithValue("@Accion", parametros.Accion);
@@ -28,11 +27,16 @@ namespace Sistema_Restaurante_hojarasca.Datos
                 cmd.Parameters.AddWithValue("@Numero_Personas", parametros.Numero_Personas);
                 cmd.Parameters.AddWithValue("@Lugar_Consumo", parametros.Lugar_Consumo);
                 cmd.ExecuteNonQuery();
-                CONEXIONMAESTRA.Cerrar();
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally
+            {
+                CONEXIONMAESTRA.Cerrar();
             }
         }
 

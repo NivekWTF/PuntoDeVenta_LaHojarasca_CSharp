@@ -18,6 +18,8 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
     {
         private string Login;
         private int idUsuario;
+        private string rol;
+        private string UsuarioInicioCaja;
 
         public frmLogin()
         {
@@ -131,10 +133,56 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
 
             if (idUsuario != 0)
             {
-                Dispose();
-                PUNTO_DE_VENTA.Visor_De_Mesas frm = new PUNTO_DE_VENTA.Visor_De_Mesas();
-                frm.ShowDialog();
+                mostrarRoles();
+                if (rol == "Cajero" || rol == "Administrador")
+                {
+                    Dispose();
+                    PUNTO_DE_VENTA.Visor_De_Mesas frm = new PUNTO_DE_VENTA.Visor_De_Mesas();
+                    frm.ShowDialog();
+                }
             }
+        }
+
+        private void ValidarAperturaCajas()
+        {
+            //Se muestran las cajas abiertas por Serial de PC
+            MostrarMovimientosDeCaja();
+            if(UsuarioInicioCaja == "Nulo")
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
+        private void MostrarMovimientosDeCaja()
+        {
+            DataTable dt = new DataTable();
+            DMovimientosCaja funcion = new DMovimientosCaja();
+            funcion.MostrarMovimientosCaja(ref dt);
+            if (dt.Rows.Count > 0)
+            {
+                UsuarioInicioCaja = dt.Rows[0]["Nombre"].ToString();
+
+            }
+            else
+            {
+                UsuarioInicioCaja = "Nulo";
+            }
+        }
+
+        private void ValidarRol()
+        {
+
+        }
+        private void mostrarRoles()
+        {
+            LUsuarios parametros = new LUsuarios();
+            DUsuarios funcion = new DUsuarios();
+            parametros.IdUsuario = idUsuario;
+            funcion.MostrarRoles(parametros, ref rol);
         }
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)

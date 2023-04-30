@@ -217,5 +217,27 @@ namespace Sistema_Restaurante_hojarasca.Datos
                 CONEXIONMAESTRA.Cerrar();
             }
         }
+
+        public void MostrarRoles (LUsuarios parametros, ref string rol)
+        {
+            try
+            {
+                CONEXIONMAESTRA.abrir();
+                SqlCommand da = new SqlCommand("mostrarRoles", CONEXIONMAESTRA.conectar);
+                da.CommandType = CommandType.StoredProcedure;
+                da.Parameters.AddWithValue("@idusuario", parametros.IdUsuario);
+                rol = da.ExecuteScalar().ToString();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.StackTrace);
+            }
+            finally
+            {
+                CONEXIONMAESTRA.Cerrar();
+            }
+        }
     }
 }
