@@ -63,5 +63,28 @@ namespace Sistema_Restaurante_hojarasca.Datos
             }
         }
 
+        public void MostrarMovCajaUsuario(ref int idMov, LMovimientosCaja parametros)
+        {
+            try
+            {
+                Bases.Obtener_SerialPC(ref SerialPC);
+                CONEXIONMAESTRA.abrir();
+                SqlCommand da = new SqlCommand("MostrarMovCajaUser", CONEXIONMAESTRA.conectar);
+                da.CommandType = CommandType.StoredProcedure;
+                da.Parameters.AddWithValue("@serial", SerialPC);
+                da.Parameters.AddWithValue("@idusuario", parametros.Idusuario);
+                idMov = Convert.ToInt32(da.ExecuteScalar());
+            }
+            catch(Exception ex)
+            {
+                idMov = 0;
+            }
+            finally
+            {
+                CONEXIONMAESTRA.Cerrar()M
+            }
+    
+        }
+
     }
 }

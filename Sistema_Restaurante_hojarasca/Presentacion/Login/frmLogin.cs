@@ -20,6 +20,9 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
         private int idUsuario;
         private string rol;
         private string UsuarioInicioCaja;
+        private string Estado_AperturaCaja;
+        private int idSesion;
+        int idMovCaja;
 
         public frmLogin()
         {
@@ -123,7 +126,7 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
             //MessageBox.Show(Login);
         }
 
-        private void txtContraseña_TextChanged(object sender, EventArgs e)
+        private void ValidarUsuarios()
         {
             LUsuarios parametros = new LUsuarios();
             DUsuarios funcion = new DUsuarios();
@@ -142,6 +145,10 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
                 }
             }
         }
+        private void txtContraseña_TextChanged(object sender, EventArgs e)
+        {
+            ValidarUsuarios();
+        }
 
         private void ValidarAperturaCajas()
         {
@@ -149,12 +156,58 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
             MostrarMovimientosDeCaja();
             if(UsuarioInicioCaja == "Nulo")
             {
-
+                Insertar_MovimientosCaja();
+                Estado_AperturaCaja = "Nuevo";
+                ValidarRol();
             }
             else
             {
-
+                //Mostramos las cajas abiertas por Serial de PC y Usuario
+                MostrarMovimientosCaja_Usuario();
             }
+        }
+
+        private void MostrarMovimientosCaja_Usuario()
+        {
+            LMovimientosCaja parametros = new LMovimientosCaja();
+            DMovimientosCaja funcion = new DMovimientosCaja();
+            parametros.Idusuario = idUsuario;
+            funcion.MostrarMovCajaUsuario(ref idMovCaja, parametros);
+
+            if (idMovCaja == 0)
+            {
+                if (rol == "Administrador")
+                {
+                    Estado_AperturaCaja = "Abierta";
+                    MessageBox.Show("Todos los registros se harán con el Usuario: " + UsuarioInicioCaja + 
+                        "*, Inicia Sesión con el Usuario " + UsuarioInicioCaja + "-ó- el Usuario *Admin*", 
+                        "Caja Iniciada", MessageBoxButtons.OK, 
+                        MessageBoxIcon.Information);
+                    ValidarRol();
+                }
+                else
+                {
+                    MessageBox.Show("Para poder continuar con el Turno de " + UsuarioInicioCaja +
+                        "*, Inicia Sesión con el Usuario " + UsuarioInicioCaja + "-ó- el Usuario *Admin*",
+                        "Caja Iniciada", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                Estado_AperturaCaja = "Abierta";
+                ValidarRol();
+            }
+
+        }
+        
+        private void Insertar_MovimientosCaja()
+        {
+            LMovimientosCaja parametros = new LMovimientosCaja();
+            DMovimientosCaja funcion = new DMovimientosCaja();
+            parametros.Idusuario = idUsuario;
+            funcion.insertar_MovimientoCaja(parametros);
+
         }
 
         private void MostrarMovimientosDeCaja()
@@ -175,7 +228,63 @@ namespace Sistema_Restaurante_hojarasca.Presentacion.Login
 
         private void ValidarRol()
         {
+            if (rol == "Cajero" || rol== "Administrador")
+            {
+                if (Estado_AperturaCaja == "Nuevo")
+                {
+                    MostrarInicioSesion();
+                    Dispose();
+                    Caja.AperturaCaja frm = new Caja.AperturaCaja();
+                    frm.ShowDialog();
+                }
+                else
+                {
+                    PasarVisorMesas();
+                }
+            }
+            else
+            {
+                PasarVisorMesas();
+            }
+        }
 
+        private void PasarVisorMesas()
+        {
+            MostrarInicioSesion();
+            Dispose();
+            PUNTO_DE_VENTA.Visor_De_Mesas frm = new PUNTO_DE_VENTA.Visor_De_Mesas();
+            frm.ShowDialog();
+        }
+
+        private void MostrarInicioSesion()
+        {
+            DIniciosSesion funcion = new DIniciosSesion();
+            funcion.MostrarInicioSesion(ref idSesion);
+            if (idSesion > 0)
+            {
+                EditarInicioSesion();
+            }
+            else
+            {
+                InsertarInicioSesion();
+            }
+        }
+
+        private void InsertarInicioSesion()
+        {
+            LIniciosSesion parametros = new LIniciosSesion();
+            DIniciosSesion funcion = new DIniciosSesion();
+            parametros.idUsuario = idUsuario;
+            funcion.insertarInicioSesion(parametros);
+        }
+
+        private void EditarInicioSesion()
+        {
+            LIniciosSesion parametros = new LIniciosSesion();
+            DIniciosSesion funcion = new DIniciosSesion();
+            parametros.idUsuario = idUsuario;
+            parametros.idSesion = idSesion;
+            funcion.editarInicioSesion(parametros);
         }
         private void mostrarRoles()
         {
